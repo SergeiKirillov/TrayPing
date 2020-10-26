@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrayPing", "TrayPing\TrayPi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wfPingHost", "wfPingHost\wfPingHost.csproj", "{4D660B8C-BFD7-4197-AFCB-4DBF8301CBA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HowToPingAHost", "HowToPingAHost\HowToPingAHost.csproj", "{171FF70D-CCB0-40AD-B231-F40DB6432EA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingAServerUsing", "PingAServerUsing\PingAServerUsing.csproj", "{4FB46F4E-5228-469C-956E-1C664A43921C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4D660B8C-BFD7-4197-AFCB-4DBF8301CBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D660B8C-BFD7-4197-AFCB-4DBF8301CBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D660B8C-BFD7-4197-AFCB-4DBF8301CBA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171FF70D-CCB0-40AD-B231-F40DB6432EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171FF70D-CCB0-40AD-B231-F40DB6432EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171FF70D-CCB0-40AD-B231-F40DB6432EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171FF70D-CCB0-40AD-B231-F40DB6432EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB46F4E-5228-469C-956E-1C664A43921C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB46F4E-5228-469C-956E-1C664A43921C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB46F4E-5228-469C-956E-1C664A43921C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB46F4E-5228-469C-956E-1C664A43921C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

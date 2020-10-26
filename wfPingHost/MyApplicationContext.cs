@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -69,16 +70,32 @@ namespace wfPingHost
                 
                 Thread.Sleep(1000);
 
-                if((DateTime.Now.Second)%2==0)
-                {
-                    ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
-                }
-                else
-                {
-                    ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
-                }
+                 
 
-                System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                try
+                {
+                    Ping myPing = new Ping();
+                    PingReply reply = myPing.Send("192.168.1.1", 1000);
+
+                    System.Diagnostics.Debug.WriteLine(reply.Status);
+
+                    if (reply != null)
+                    {
+                        //Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime.ToString() + " \n Address : " + reply.Address);
+                        //Console.WriteLine(reply.ToString());
+                        ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
+                    }
+                    else
+                    {
+                        ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
+                    }
+
+                    
+                }
+                catch
+                {
+                    Console.WriteLine("ERROR: You have Some TIMEOUT issue");
+                }
 
             }
         }
