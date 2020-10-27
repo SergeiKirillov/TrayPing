@@ -75,20 +75,29 @@ namespace wfPingHost
                 try
                 {
                     Ping myPing = new Ping();
-                    PingReply reply = myPing.Send("192.168.1.1", 1000);
+                    string IP = "192.168.1.1";
+                    PingReply reply = myPing.Send(IP, 1000);
 
-                    System.Diagnostics.Debug.WriteLine(reply.Status);
+                    
 
                     if (reply != null)
                     {
                         //Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime.ToString() + " \n Address : " + reply.Address);
                         //Console.WriteLine(reply.ToString());
-                        ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
+                        if (reply.Status==IPStatus.Success) //https://docs.microsoft.com/ru-ru/dotnet/api/system.net.networkinformation.ipstatus?view=netcore-3.1
+                        {
+                            //clWriteReadinBD wrbd = new clWriteReadinBD();
+                            //wrbd.WriteBD(IP, DateTime.Now, reply.Status.ToString());
+                            ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
+                        }
+                        else
+                        {
+                            clWriteReadinBD wrFile = new clWriteReadinBD();
+                            wrFile.WriteFile(IP, DateTime.Now, reply.Status.ToString());
+                            ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
+                        }
                     }
-                    else
-                    {
-                        ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
-                    }
+                    
 
                     
                 }
