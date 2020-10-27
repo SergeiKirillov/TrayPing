@@ -14,12 +14,13 @@ namespace wfPingHost
     {
         NotifyIcon ni = new NotifyIcon();
         Setting configWindows = new Setting();
+        frmLogView Logging = new frmLogView();
         Thread ph;
-        bool flagPing = false;
         //Configuration configWindow = new Configuration();
 
         public MyApplicationContext()
         {
+            MenuItem viewLogMenuItem = new MenuItem("Просмотр Лога", new EventHandler(ShowViewLog));
             MenuItem configMenuItem = new MenuItem("Конфигурация", new EventHandler(ShowConfig));
             MenuItem exitMenuItem = new MenuItem("Выход", new EventHandler(Exit));
 
@@ -28,12 +29,24 @@ namespace wfPingHost
            
             
             ni.DoubleClick += new EventHandler(ShowMessage);
-            ni.ContextMenu = new ContextMenu(new MenuItem[] { configMenuItem, exitMenuItem });
+            ni.ContextMenu = new ContextMenu(new MenuItem[] { viewLogMenuItem, configMenuItem, exitMenuItem });
             ni.Visible = true;
 
             ph = new Thread(PingHost);
             ph.Start();
             
+        }
+
+        private void ShowViewLog(object sender, EventArgs e)
+        {
+            if (Logging.Visible)
+            {
+                Logging.Focus();
+            }
+            else
+            {
+                Logging.ShowDialog();
+            }
         }
 
         private void ShowMessage(object sender, EventArgs e)
@@ -86,8 +99,9 @@ namespace wfPingHost
                         //Console.WriteLine(reply.ToString());
                         if (reply.Status==IPStatus.Success) //https://docs.microsoft.com/ru-ru/dotnet/api/system.net.networkinformation.ipstatus?view=netcore-3.1
                         {
-                            //clWriteReadinBD wrbd = new clWriteReadinBD();
-                            //wrbd.WriteBD(IP, DateTime.Now, reply.Status.ToString());
+                            clWriteReadinBD wrbd = new clWriteReadinBD();
+                            wrbd.WriteBD(IP, DateTime.Now, reply.Status.ToString());
+
                             ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
                         }
                         else
