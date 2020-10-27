@@ -15,25 +15,33 @@ namespace wfPingHost
     }
     class clWriteReadinBD
     {
+
         public void WriteBD(string IP,DateTime dtNow,string messageBD)
         {
-            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "MyData.db";
-
-            using (var db = new LiteDatabase(pathProg))
+            try
             {
-                //TODO Найти в все точки и убрать их -> получившееся имя и будет названием таблицы 
-                var col = db.GetCollection<PingHost>("Host");
+                string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "MyData.db";
 
-                var host = new PingHost
+                using (var db = new LiteDatabase(pathProg))
                 {
-                    HostIP = IP,
-                    dtHost = dtNow,
-                    RezultHost = messageBD
-                };
+                    //TODO Найти в все точки и убрать их -> получившееся имя и будет названием таблицы 
+                    var col = db.GetCollection<PingHost>("Host");
 
-                col.Insert(host);
+                    var host = new PingHost
+                    {
+                        HostIP = IP,
+                        dtHost = dtNow,
+                        RezultHost = messageBD
+                    };
+
+                    col.Insert(host);
+                }
+                //System.Diagnostics.Debug.WriteLine(dtNow.ToString()+"-----"+messageBD);
             }
-            //System.Diagnostics.Debug.WriteLine(dtNow.ToString()+"-----"+messageBD);
+            catch
+            {
+            }
+            
 
         }
 

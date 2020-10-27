@@ -70,6 +70,9 @@
     <Compile Include="Setting.Designer.cs">
       <DependentUpon>Setting.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmLogView.resx">
+      <DependentUpon>frmLogView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -103,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\red-circle-64.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Uiconstock-Flat-File-Type-Log.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
