@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LiteDB;
 
 namespace wfPingHost
 {
@@ -46,6 +47,24 @@ namespace wfPingHost
 
             string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "MyData.db";
             System.Diagnostics.Debug.WriteLine("File BD :"+pathProg);
+
+            //using(var db = new LiteDatabase(pathProg))
+            //{
+            //    var col = db.GetCollection<PingHost>("Host");
+
+            //    col.EnsureIndex(x => x.HostIP);
+
+            //    var results = col.Query()
+            //        .Where(x => x.HostIP.Equals("192.168.1.1"))
+            //        .Select(x => new { x.dtHost, x.RezultHost })
+            //        .ToList();
+
+            //    GridHostRezult.DataSource = results.ToList();
+            //    //GridHostRezult.DataBindings();
+
+            //}
+
+
 
             //// Use LINQ to query documents (filter, sort, transform)
             //var results = col.Query()
