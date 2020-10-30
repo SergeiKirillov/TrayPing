@@ -160,6 +160,10 @@ namespace wfPingHost
                 {
                     filter = HostCollection.All();
                 }
+                else if (Status.Equals("Failed All"))
+                {
+                    filter = HostCollection.Find(i => i.strPingStatus!= "Success");
+                }
                 else
                 {
                     filter = HostCollection.Find(i => i.strPingStatus.Equals(Status));

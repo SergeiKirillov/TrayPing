@@ -38,24 +38,24 @@
             // GridHostRezult
             // 
             this.GridHostRezult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridHostRezult.Location = new System.Drawing.Point(12, 108);
+            this.GridHostRezult.Location = new System.Drawing.Point(12, 68);
             this.GridHostRezult.Name = "GridHostRezult";
-            this.GridHostRezult.Size = new System.Drawing.Size(776, 330);
+            this.GridHostRezult.Size = new System.Drawing.Size(379, 370);
             this.GridHostRezult.TabIndex = 0;
             // 
             // dtSelect
             // 
             this.dtSelect.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtSelect.Location = new System.Drawing.Point(139, 81);
+            this.dtSelect.Location = new System.Drawing.Point(206, 12);
             this.dtSelect.Name = "dtSelect";
-            this.dtSelect.Size = new System.Drawing.Size(226, 21);
+            this.dtSelect.Size = new System.Drawing.Size(185, 21);
             this.dtSelect.TabIndex = 13;
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(370, 79);
+            this.btnFilter.Location = new System.Drawing.Point(12, 39);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(156, 23);
+            this.btnFilter.Size = new System.Drawing.Size(379, 23);
             this.btnFilter.TabIndex = 12;
             this.btnFilter.Text = "Применить Фильтр";
             this.btnFilter.UseVisualStyleBackColor = true;
@@ -64,16 +64,16 @@
             // cmbFiltrStatus
             // 
             this.cmbFiltrStatus.FormattingEnabled = true;
-            this.cmbFiltrStatus.Location = new System.Drawing.Point(12, 81);
+            this.cmbFiltrStatus.Location = new System.Drawing.Point(12, 12);
             this.cmbFiltrStatus.Name = "cmbFiltrStatus";
-            this.cmbFiltrStatus.Size = new System.Drawing.Size(121, 21);
+            this.cmbFiltrStatus.Size = new System.Drawing.Size(188, 21);
             this.cmbFiltrStatus.TabIndex = 11;
             // 
             // frmLogView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(403, 450);
             this.Controls.Add(this.dtSelect);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.cmbFiltrStatus);
