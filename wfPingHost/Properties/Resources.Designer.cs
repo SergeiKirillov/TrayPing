@@ -89,5 +89,32 @@ namespace wfPingHost.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 192.168.1.1.
+        /// </summary>
+        public static string strIP {
+            get {
+                return ResourceManager.GetString("strIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на True.
+        /// </summary>
+        public static string strLogBD {
+            get {
+                return ResourceManager.GetString("strLogBD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на True.
+        /// </summary>
+        public static string strLogFiles {
+            get {
+                return ResourceManager.GetString("strLogFiles", resourceCulture);
+            }
+        }
     }
 }

@@ -13,17 +13,67 @@ namespace wfPingHost
 {
     public partial class frmLogView : Form
     {
-        bool db = true; //показываем лог из файла или лог из db
+        private static string IP = Properties.Resources.strIP;
+        private static string NameDB = IP.Replace(".", "");
+        private static string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
         public frmLogView()
         {
-            
+                                   
             InitializeComponent();
+
+            var LibDb = new clWriteReadinBD();
+
+            var StatusPing = GetListStatus();
+            StatusPing.Add("All");
+            StatusPing.Add("Failed All");
+            cmbFiltrStatus.DataSource = StatusPing;
+            cmbFiltrStatus.SelectedItem = 24;
+
+            RefreshGridView(LibDb.GetAll());
+
+            GridHostRezult.Columns[0].Visible = false;
+            GridHostRezult.AllowUserToAddRows = false;
+            GridHostRezult.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            GridHostRezult.MultiSelect = false;
+            
+        }
+
+        private List<string> GetListStatus()
+        {
+            var PingStatus = new List<string>();
+            
+            PingStatus.Add("BadDestination");
+            PingStatus.Add("BadHeader");
+            PingStatus.Add("BadOption");
+            PingStatus.Add("BadRoute");
+            PingStatus.Add("DestinationHostUnreachable");
+            PingStatus.Add("DestinationNetworkUnreachable");
+            PingStatus.Add("DestinationPortUnreachable");
+            PingStatus.Add("DestinationProhibited");
+            PingStatus.Add("DestinationProtocolUnreachable");
+            PingStatus.Add("DestinationScopeMismatch");
+            PingStatus.Add("DestinationUnreachable");
+            PingStatus.Add("HardwareError");
+            PingStatus.Add("IcmpError");
+            PingStatus.Add("NoResources");
+            PingStatus.Add("PacketTooBig");
+            PingStatus.Add("ParameterProblem");
+            PingStatus.Add("SourceQuench");
+            PingStatus.Add("Success");
+            PingStatus.Add("TimedOut");
+            PingStatus.Add("TimeExceeded");
+            PingStatus.Add("TtlExpired");
+            PingStatus.Add("TtlReassemblyTimeExceeded");
+            PingStatus.Add("Unknown");
+            PingStatus.Add("UnrecognizedNextHeader");
+            return PingStatus;
+
         }
 
         private void frmLogView_Load(object sender, EventArgs e)
         {
-            if (db)
+            if (Convert.ToBoolean(Properties.Resources.strLogBD))
             {
                 frmLogView_dbLoad();
             }
@@ -45,47 +95,26 @@ namespace wfPingHost
             //metanit.com/sharp/adonet/3.8.php
             //www.codecompiled.com/query-datatable-using-linq-in-csharp/
 
-            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "MyData.db";
-            System.Diagnostics.Debug.WriteLine("File BD :"+pathProg);
-
-            //using(var db = new LiteDatabase(pathProg))
-            //{
-            //    var col = db.GetCollection<PingHost>("Host");
-
-            //    col.EnsureIndex(x => x.HostIP);
-
-            //    var results = col.Query()
-            //        .Where(x => x.HostIP.Equals("192.168.1.1"))
-            //        .Select(x => new { x.dtHost, x.RezultHost })
-            //        .ToList();
-
-            //    GridHostRezult.DataSource = results.ToList();
-            //    //GridHostRezult.DataBindings();
-
-            //}
 
 
+            
+        }
 
-            //// Use LINQ to query documents (filter, sort, transform)
-            //var results = col.Query()
-            //    .Where(x => x.Name.StartsWith("J"))
-            //    .OrderBy(x => x.Name)
-            //    .Select(x => new { x.Name, NameUpper = x.Name.ToUpper() })
-            //    .Limit(10)
-            //    .ToList();
+        private void RefreshGridView(IList<clDataPing> PingRezult)
+        {
+            var bindList = new BindingList<clDataPing>(PingRezult);
+            var source = new BindingSource(bindList, null);
 
-                //You should avoid ArrayLists. Use List instead.
+            GridHostRezult.DataSource = source;
+        }
 
-                //List<Student> StudentList = new List<Student>(); /* ... */
-                //            And you query should look like:
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            var FilterList = new clWriteReadinBD();
 
-                //var query = from student in StudentList
-                //            where student.FirstName == "Cesar"
-                //            select student;
-                //            Then bind your Grid:
+            var filterTypeStatus = FilterList.Get(cmbFiltrStatus.SelectedValue.ToString(), dtSelect.Value);
+            RefreshGridView(filterTypeStatus);
 
-                // GridView1.DataSource = query.ToList();
-                //            GridView1.DataBind();
         }
     }
 }

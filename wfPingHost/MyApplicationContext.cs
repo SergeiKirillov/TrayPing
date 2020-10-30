@@ -83,12 +83,12 @@ namespace wfPingHost
                 
                 Thread.Sleep(1000);
 
-                 
-
                 try
                 {
                     Ping myPing = new Ping();
-                    string IP = "192.168.1.1";
+
+                    //string IP = "192.168.1.1";
+                    string IP = Properties.Resources.strIP;
                     PingReply reply = myPing.Send(IP, 1000);
 
                     
@@ -97,17 +97,16 @@ namespace wfPingHost
                     {
                         //Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime.ToString() + " \n Address : " + reply.Address);
                         //Console.WriteLine(reply.ToString());
-                        if (reply.Status==IPStatus.Success) //https://docs.microsoft.com/ru-ru/dotnet/api/system.net.networkinformation.ipstatus?view=netcore-3.1
-                        {
-                            clWriteReadinBD wrbd = new clWriteReadinBD();
-                            wrbd.WriteBD(IP, DateTime.Now, reply.Status.ToString());
 
+                        clWriteReadinBD wrbd = new clWriteReadinBD();
+                        wrbd.Write(DateTime.Now, reply.Status.ToString());
+
+                        if (reply.Status == IPStatus.Success) //https://docs.microsoft.com/ru-ru/dotnet/api/system.net.networkinformation.ipstatus?view=netcore-3.1
+                        { 
                             ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
                         }
                         else
                         {
-                            clWriteReadinBD wrFile = new clWriteReadinBD();
-                            wrFile.WriteFile(IP, DateTime.Now, reply.Status.ToString());
                             ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
                         }
                     }
@@ -115,9 +114,10 @@ namespace wfPingHost
 
                     
                 }
-                catch
+                catch (Exception e)
                 {
-                    Console.WriteLine("ERROR: You have Some TIMEOUT issue");
+                    System.Diagnostics.Debug.WriteLine("PingHost - " + e.Message);
+                    //Console.WriteLine("ERROR: You have Some TIMEOUT issue");
                 }
 
             }

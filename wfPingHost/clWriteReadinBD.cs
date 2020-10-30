@@ -7,45 +7,107 @@ using LiteDB;
 
 namespace wfPingHost
 {
-    public class PingHost
-    {
-        public string HostIP;
-        public DateTime dtHost;
-        public string RezultHost;
-    }
+
+
+    
     class clWriteReadinBD
     {
+        private static string IP = Properties.Resources.strIP;
+        private static string NameDB = IP.Replace(".", "");
+        private static string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
-        public void WriteBD(string IP,DateTime dtNow,string messageBD)
+        public void Write(DateTime dtNow, string Status)
         {
             try
             {
-                string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "MyData.db";
-
-                using (var db = new LiteDatabase(pathProg))
+                if (Convert.ToBoolean(Properties.Resources.strLogFiles))
                 {
-                    //TODO Найти в все точки и убрать их -> получившееся имя и будет названием таблицы 
-                    var col = db.GetCollection<PingHost>("Host");
-
-                    var host = new PingHost
-                    {
-                        HostIP = IP,
-                        dtHost = dtNow,
-                        RezultHost = messageBD
-                    };
-
-                    col.Insert(host);
+                    WriteFile(dtNow, Status);
                 }
-                //System.Diagnostics.Debug.WriteLine(dtNow.ToString()+"-----"+messageBD);
+
+                if (Convert.ToBoolean(Properties.Resources.strLogBD))
+                {
+                    WriteBD(dtNow, Status);
+                }
             }
-            catch
+            catch 
+            {}
+           
+        }
+
+
+        private void WriteBD(DateTime dtNow,string messageBD)
+        {
+            try
             {
+                
+                //System.Diagnostics.Debug.WriteLine("База данных: "+pathProg);
+
+                //LiteDB new
+                //using (var db = new LiteDatabase(pathProg))
+                //{
+                //    //TODO Найти в все точки и убрать их -> получившееся имя и будет названием таблицы 
+                //    var col = db.GetCollection<PingHost>("Host");
+
+                //    var host = new PingHost
+                //    {
+                //        HostIP = IP,
+                //        dtHost = dtNow,
+                //        RezultHost = messageBD
+                //    };
+
+                //    col.Insert(host);
+                //}
+
+                //LiteDb 0.6
+                var PingNowHost = new clDataPing
+                {
+                    ID = Guid.NewGuid(),
+                    dtPingData = dtNow,
+                    strPingStatus = messageBD,
+                    strPingIP = IP
+                };
+
+                using (var db = new LiteEngine(pathProg)) 
+                {
+                    var HostCollection = db.GetCollection<clDataPing>("PingHost");
+
+                    //HostCollection.EnsureIndex((clDataPing x) => x.dtPingData,true);
+                    //HostCollection.EnsureIndex((clDataPing x) => x.strPingStatus, true);
+
+                    HostCollection.Insert(PingNowHost);
+                    IndexIsHost(HostCollection);
+
+                }
+
+                                
+                //System.Diagnostics.Debug.WriteLine(dtNow.ToString()+"-----"+messageBD);
+
+
+
             }
-            
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("WriteBD - " + e.Message);
+            }
+
 
         }
 
-        public void WriteFile(string IP, DateTime dtNow, string messageBD)
+        private void IndexIsHost(Collection<clDataPing> hostCollection)
+        {
+            hostCollection.EnsureIndex(x => x.ID);
+            hostCollection.EnsureIndex(x => x.dtPingData);
+            hostCollection.EnsureIndex(x => x.strPingIP);
+            hostCollection.EnsureIndex(x => x.strPingStatus);
+        }
+        //Заменил  на  
+        //HostCollection.EnsureIndex((clDataPing x) => x.dtPingData,true);
+        //HostCollection.EnsureIndex((clDataPing x) => x.strPingStatus, true);
+        //при создании BD
+
+
+        private void WriteFile(DateTime dtNow, string messageBD)
         {
             //System.Diagnostics.Debug.WriteLine(dtNow.ToString() + "-----" + messageBD);
 
@@ -63,6 +125,53 @@ namespace wfPingHost
             }
             catch
             { }
+
+        }
+
+        public IList<clDataPing> GetAll()
+        {
+            var returnRezult = new List<clDataPing>();
+
+            using (var db = new LiteEngine(pathProg))
+            {
+                var HostCollection = db.GetCollection<clDataPing>("PingHost");
+
+                var results = HostCollection.All();
+                foreach (clDataPing item in results)
+                {
+                    returnRezult.Add(item);  
+                }
+
+                return returnRezult;
+            }
+        }
+
+        public IList<clDataPing> Get(string Status, DateTime dtSelect)
+        {
+            var returnResult = new List<clDataPing>();
+
+            using (var db = new LiteEngine(pathProg))
+            {
+                var HostCollection = db.GetCollection<clDataPing>("PingHost");
+
+                IEnumerable<clDataPing> filter;
+
+                if (Status.Equals("All"))
+                {
+                    filter = HostCollection.All();
+                }
+                else
+                {
+                    filter = HostCollection.Find(i => i.strPingStatus.Equals(Status));
+                }
+
+                foreach (clDataPing item in filter)
+                {
+                    returnResult.Add(item);
+                }
+
+                return returnResult.FindAll(i => i.dtPingData.Date == dtSelect.Date);
+            }
 
         }
     }
