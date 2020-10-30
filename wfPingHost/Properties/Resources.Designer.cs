@@ -91,6 +91,15 @@ namespace wfPingHost.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на True.
+        /// </summary>
+        public static string strAutoStart {
+            get {
+                return ResourceManager.GetString("strAutoStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 192.168.1.1.
         /// </summary>
         public static string strIP {

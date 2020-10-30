@@ -15,6 +15,17 @@ namespace wfPingHost
         public Setting()
         {
             InitializeComponent();
+
+            string HostIP = Properties.Resources.strIP;
+
+            bool blWriteDb = Convert.ToBoolean(Properties.Resources.strLogBD);
+            bool blWriteFile = Convert.ToBoolean(Properties.Resources.strLogFiles);
+            bool blAutoStart = Convert.ToBoolean(Properties.Resources.strAutoStart);
+
+            txtIP.Text = HostIP;
+            chkBD.Checked = blWriteDb;
+            chkFiles.Checked = blWriteFile;
+            chkAutoStart.Checked = blAutoStart;
         }
     }
 }
