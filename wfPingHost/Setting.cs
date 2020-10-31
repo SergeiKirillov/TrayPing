@@ -18,14 +18,21 @@ namespace wfPingHost
 
             string HostIP = Properties.Resources.strIP;
 
-            bool blWriteDb = Convert.ToBoolean(Properties.Resources.strLogBD);
-            bool blWriteFile = Convert.ToBoolean(Properties.Resources.strLogFiles);
+            bool blWriteDbAll = Convert.ToBoolean(Properties.Resources.strLogBDAll);
+            bool blWriteFileAll = Convert.ToBoolean(Properties.Resources.strLogFilesAll);
             bool blAutoStart = Convert.ToBoolean(Properties.Resources.strAutoStart);
+            bool blWriteDbError = Convert.ToBoolean(Properties.Resources.strLogBDError);
+            bool blWriteFileError = Convert.ToBoolean(Properties.Resources.strLogFilesError);
+
 
             txtIP.Text = HostIP;
-            chkBD.Checked = blWriteDb;
-            chkFiles.Checked = blWriteFile;
+            chkBD.Checked = blWriteDbAll;
+            chkFiles.Checked = blWriteFileAll;
+            chkBDError.Checked = blWriteDbError;
+            chkFileError.Checked = blWriteFileError;
             chkAutoStart.Checked = blAutoStart;
         }
+
+        
     }
 }

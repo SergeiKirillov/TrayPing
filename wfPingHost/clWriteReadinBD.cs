@@ -20,12 +20,12 @@ namespace wfPingHost
         {
             try
             {
-                if (Convert.ToBoolean(Properties.Resources.strLogFiles))
+                if ((Convert.ToBoolean(Properties.Resources.strLogFilesAll))|| (Convert.ToBoolean(Properties.Resources.strLogFilesError)))
                 {
                     WriteFile(dtNow, Status);
                 }
 
-                if (Convert.ToBoolean(Properties.Resources.strLogBD))
+                if ((Convert.ToBoolean(Properties.Resources.strLogBDAll))||(Convert.ToBoolean(Properties.Resources.strLogBDError)))
                 {
                     WriteBD(dtNow, Status);
                 }

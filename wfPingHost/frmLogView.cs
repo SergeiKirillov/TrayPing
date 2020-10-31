@@ -25,7 +25,12 @@ namespace wfPingHost
             var LibDb = new clWriteReadinBD();
 
             var StatusPing = GetListStatus();
-            StatusPing.Add("All");
+            if (Convert.ToBoolean(Properties.Resources.strLogBDAll)||Convert.ToBoolean(Properties.Resources.strLogFilesAll))
+            {
+                StatusPing.Add("All");
+            }
+
+            
             StatusPing.Add("Failed All");
             cmbFiltrStatus.DataSource = StatusPing;
             cmbFiltrStatus.SelectedItem = 24;
@@ -73,7 +78,7 @@ namespace wfPingHost
 
         private void frmLogView_Load(object sender, EventArgs e)
         {
-            if (Convert.ToBoolean(Properties.Resources.strLogBD))
+            if ((Convert.ToBoolean(Properties.Resources.strLogBDAll))||(Convert.ToBoolean(Properties.Resources.strLogBDError)))
             {
                 frmLogView_dbLoad();
             }

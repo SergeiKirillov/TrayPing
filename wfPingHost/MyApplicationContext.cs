@@ -98,8 +98,18 @@ namespace wfPingHost
                         //Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime.ToString() + " \n Address : " + reply.Address);
                         //Console.WriteLine(reply.ToString());
 
-                        clWriteReadinBD wrbd = new clWriteReadinBD();
-                        wrbd.Write(DateTime.Now, reply.Status.ToString());
+                        if (((Convert.ToBoolean(Properties.Resources.strLogBDError))||(Convert.ToBoolean(Properties.Resources.strLogFilesError))) && (reply.Status != IPStatus.Success))
+                        {
+                            clWriteReadinBD wrbd = new clWriteReadinBD();
+                            wrbd.Write(DateTime.Now, reply.Status.ToString());
+                        }
+                        else if ((Convert.ToBoolean(Properties.Resources.strLogBDAll)) || (Convert.ToBoolean(Properties.Resources.strLogFilesAll)))
+                        {
+                            clWriteReadinBD wrbd = new clWriteReadinBD();
+                            wrbd.Write(DateTime.Now, reply.Status.ToString());
+                        }
+
+
 
                         if (reply.Status == IPStatus.Success) //https://docs.microsoft.com/ru-ru/dotnet/api/system.net.networkinformation.ipstatus?view=netcore-3.1
                         { 

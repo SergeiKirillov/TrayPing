@@ -128,15 +128,21 @@
     <value>..\Resources\red-circle-64.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="strIP" xml:space="preserve">
-    <value>192.168.1.1</value>
+    <value>192.168.0.21</value>
   </data>
-  <data name="strLogBD" xml:space="preserve">
-    <value>True</value>
+  <data name="strLogBDAll" xml:space="preserve">
+    <value>False</value>
   </data>
-  <data name="strLogFiles" xml:space="preserve">
-    <value>True</value>
+  <data name="strLogFilesAll" xml:space="preserve">
+    <value>False</value>
   </data>
   <data name="strAutoStart" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="strLogBDError" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="strLogFilesError" xml:space="preserve">
     <value>True</value>
   </data>
 </root>

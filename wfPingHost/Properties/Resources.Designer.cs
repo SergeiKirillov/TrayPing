@@ -100,7 +100,7 @@ namespace wfPingHost.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 192.168.1.1.
+        ///   Ищет локализованную строку, похожую на 192.168.0.21.
         /// </summary>
         public static string strIP {
             get {
@@ -109,20 +109,38 @@ namespace wfPingHost.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на True.
+        ///   Ищет локализованную строку, похожую на False.
         /// </summary>
-        public static string strLogBD {
+        public static string strLogBDAll {
             get {
-                return ResourceManager.GetString("strLogBD", resourceCulture);
+                return ResourceManager.GetString("strLogBDAll", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на True.
         /// </summary>
-        public static string strLogFiles {
+        public static string strLogBDError {
             get {
-                return ResourceManager.GetString("strLogFiles", resourceCulture);
+                return ResourceManager.GetString("strLogBDError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на False.
+        /// </summary>
+        public static string strLogFilesAll {
+            get {
+                return ResourceManager.GetString("strLogFilesAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на True.
+        /// </summary>
+        public static string strLogFilesError {
+            get {
+                return ResourceManager.GetString("strLogFilesError", resourceCulture);
             }
         }
     }
