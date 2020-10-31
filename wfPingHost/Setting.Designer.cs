@@ -28,30 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtIP = new System.Windows.Forms.TextBox();
             this.chkBD = new System.Windows.Forms.CheckBox();
             this.chkFiles = new System.Windows.Forms.CheckBox();
             this.chkAutoStart = new System.Windows.Forms.CheckBox();
             this.chkFileError = new System.Windows.Forms.CheckBox();
             this.chkBDError = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "IP адрес";
-            // 
-            // txtIP
-            // 
-            this.txtIP.Location = new System.Drawing.Point(57, 4);
-            this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(100, 20);
-            this.txtIP.TabIndex = 1;
             // 
             // chkBD
             // 
@@ -113,8 +95,6 @@
             this.Controls.Add(this.chkAutoStart);
             this.Controls.Add(this.chkFiles);
             this.Controls.Add(this.chkBD);
-            this.Controls.Add(this.txtIP);
-            this.Controls.Add(this.label1);
             this.Name = "Setting";
             this.Text = "Настройка программы";
             this.ResumeLayout(false);
@@ -123,9 +103,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.CheckBox chkBD;
         private System.Windows.Forms.CheckBox chkFiles;
         private System.Windows.Forms.CheckBox chkAutoStart;

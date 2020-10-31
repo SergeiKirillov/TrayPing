@@ -25,7 +25,7 @@ namespace wfPingHost
             bool blWriteFileError = Convert.ToBoolean(Properties.Resources.strLogFilesError);
 
 
-            txtIP.Text = HostIP;
+            
             chkBD.Checked = blWriteDbAll;
             chkFiles.Checked = blWriteFileAll;
             chkBDError.Checked = blWriteDbError;

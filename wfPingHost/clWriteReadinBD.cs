@@ -12,22 +12,23 @@ namespace wfPingHost
     
     class clWriteReadinBD
     {
-        private static string IP = Properties.Resources.strIP;
-        private static string NameDB = IP.Replace(".", "");
+        //private static string IP = Properties.Resources.strIP;
+        //private static string NameDB = IP.Replace(".", "");
+        private static string NameDB = DateTime.Now.ToString("ddMMyyyy");
         private static string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
-        public void Write(DateTime dtNow, string Status)
+        public void Write(string IPHost, DateTime dtNow, string Status)
         {
             try
             {
                 if ((Convert.ToBoolean(Properties.Resources.strLogFilesAll))|| (Convert.ToBoolean(Properties.Resources.strLogFilesError)))
                 {
-                    WriteFile(dtNow, Status);
+                    WriteFile(IPHost, dtNow, Status);
                 }
 
                 if ((Convert.ToBoolean(Properties.Resources.strLogBDAll))||(Convert.ToBoolean(Properties.Resources.strLogBDError)))
                 {
-                    WriteBD(dtNow, Status);
+                    WriteBD(IPHost, dtNow, Status);
                 }
             }
             catch 
@@ -36,7 +37,7 @@ namespace wfPingHost
         }
 
 
-        private void WriteBD(DateTime dtNow,string messageBD)
+        private void WriteBD(string IP,DateTime dtNow,string messageBD)
         {
             try
             {
@@ -107,7 +108,7 @@ namespace wfPingHost
         //при создании BD
 
 
-        private void WriteFile(DateTime dtNow, string messageBD)
+        private void WriteFile(string IP, DateTime dtNow, string messageBD)
         {
             //System.Diagnostics.Debug.WriteLine(dtNow.ToString() + "-----" + messageBD);
 

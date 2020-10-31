@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,27 @@ namespace wfPingHost
             GridHostRezult.AllowUserToAddRows = false;
             GridHostRezult.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GridHostRezult.MultiSelect = false;
+
+            var HostList = GetHostList();
+            HostList.Add("All");
+            cmbIP.DataSource = HostList;            
+        }
+
+        private List<string> GetHostList()
+        {
             
+            List<string> computersList = new List<string>();
+            using (StreamReader sr = new StreamReader("computersList.txt", Encoding.Default))
+            {
+                string line = "";
+                while ((line = sr.ReadLine()) != null)
+                {
+                    computersList.Add(line);
+                }
+            }
+            return computersList;
+
+           
         }
 
         private List<string> GetListStatus()

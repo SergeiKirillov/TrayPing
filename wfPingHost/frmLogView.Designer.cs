@@ -32,15 +32,16 @@
             this.dtSelect = new System.Windows.Forms.DateTimePicker();
             this.btnFilter = new System.Windows.Forms.Button();
             this.cmbFiltrStatus = new System.Windows.Forms.ComboBox();
+            this.cmbIP = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.GridHostRezult)).BeginInit();
             this.SuspendLayout();
             // 
             // GridHostRezult
             // 
             this.GridHostRezult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridHostRezult.Location = new System.Drawing.Point(12, 68);
+            this.GridHostRezult.Location = new System.Drawing.Point(12, 99);
             this.GridHostRezult.Name = "GridHostRezult";
-            this.GridHostRezult.Size = new System.Drawing.Size(379, 370);
+            this.GridHostRezult.Size = new System.Drawing.Size(379, 339);
             this.GridHostRezult.TabIndex = 0;
             // 
             // dtSelect
@@ -53,7 +54,7 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(12, 39);
+            this.btnFilter.Location = new System.Drawing.Point(12, 70);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(379, 23);
             this.btnFilter.TabIndex = 12;
@@ -69,11 +70,20 @@
             this.cmbFiltrStatus.Size = new System.Drawing.Size(188, 21);
             this.cmbFiltrStatus.TabIndex = 11;
             // 
+            // cmbIP
+            // 
+            this.cmbIP.FormattingEnabled = true;
+            this.cmbIP.Location = new System.Drawing.Point(12, 39);
+            this.cmbIP.Name = "cmbIP";
+            this.cmbIP.Size = new System.Drawing.Size(188, 21);
+            this.cmbIP.TabIndex = 14;
+            // 
             // frmLogView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(403, 450);
+            this.Controls.Add(this.cmbIP);
             this.Controls.Add(this.dtSelect);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.cmbFiltrStatus);
@@ -93,5 +103,6 @@
         private System.Windows.Forms.DateTimePicker dtSelect;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.ComboBox cmbFiltrStatus;
+        private System.Windows.Forms.ComboBox cmbIP;
     }
 }

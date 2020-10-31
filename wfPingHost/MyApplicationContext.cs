@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -10,8 +11,12 @@ using System.Windows.Forms;
 
 namespace wfPingHost
 {
-    class MyApplicationContext: ApplicationContext
+   
+
+    class MyApplicationContext : ApplicationContext
     {
+        public static List<string> hosts = new List<string>();
+
         NotifyIcon ni = new NotifyIcon();
         Setting configWindows = new Setting();
         frmLogView Logging = new frmLogView();
@@ -76,6 +81,20 @@ namespace wfPingHost
             }
         }
 
+        public List<string> getComputersListFromTxtFile(string pathToFile)
+        {
+            List<string> computersList = new List<string>();
+            using (StreamReader sr = new StreamReader(pathToFile, Encoding.Default))
+            {
+                string line = "";
+                while ((line = sr.ReadLine()) != null)
+                {
+                    computersList.Add(line);
+                }
+            }
+            return computersList;
+        }
+
         private void PingHost()
         {
             while (true)
@@ -88,41 +107,49 @@ namespace wfPingHost
                     Ping myPing = new Ping();
 
                     //string IP = "192.168.1.1";
-                    string IP = Properties.Resources.strIP;
-                    PingReply reply = myPing.Send(IP, 1000);
+                    //string IP = Properties.Resources.strIP;
+                    //PingReply reply = myPing.Send(IP, 1000);
 
                     
+                    
+                    hosts = getComputersListFromTxtFile(@"computersList.txt");
 
-                    if (reply != null)
+                    foreach (string item in hosts)
                     {
-                        //Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime.ToString() + " \n Address : " + reply.Address);
-                        //Console.WriteLine(reply.ToString());
+                        PingReply reply = myPing.Send(item, 1000);
 
-                        if (((Convert.ToBoolean(Properties.Resources.strLogBDError))||(Convert.ToBoolean(Properties.Resources.strLogFilesError))) && (reply.Status != IPStatus.Success))
+
+                        if (reply != null)
                         {
-                            clWriteReadinBD wrbd = new clWriteReadinBD();
-                            wrbd.Write(DateTime.Now, reply.Status.ToString());
-                        }
-                        else if ((Convert.ToBoolean(Properties.Resources.strLogBDAll)) || (Convert.ToBoolean(Properties.Resources.strLogFilesAll)))
-                        {
-                            clWriteReadinBD wrbd = new clWriteReadinBD();
-                            wrbd.Write(DateTime.Now, reply.Status.ToString());
-                        }
+                            //Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime.ToString() + " \n Address : " + reply.Address);
+                            //Console.WriteLine(reply.ToString());
+
+                            if (((Convert.ToBoolean(Properties.Resources.strLogBDError)) || (Convert.ToBoolean(Properties.Resources.strLogFilesError))) && (reply.Status != IPStatus.Success))
+                            {
+                                clWriteReadinBD wrbd = new clWriteReadinBD();
+                                wrbd.Write(item, DateTime.Now, reply.Status.ToString());
+                            }
+                            else if ((Convert.ToBoolean(Properties.Resources.strLogBDAll)) || (Convert.ToBoolean(Properties.Resources.strLogFilesAll)))
+                            {
+                                clWriteReadinBD wrbd = new clWriteReadinBD();
+                                wrbd.Write(item,DateTime.Now, reply.Status.ToString());
+                            }
 
 
 
-                        if (reply.Status == IPStatus.Success) //https://docs.microsoft.com/ru-ru/dotnet/api/system.net.networkinformation.ipstatus?view=netcore-3.1
-                        { 
-                            ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
+                            if (reply.Status == IPStatus.Success) //https://docs.microsoft.com/ru-ru/dotnet/api/system.net.networkinformation.ipstatus?view=netcore-3.1
+                            {
+                                ni.Icon = wfPingHost.Properties.Resources.green_circle_64;
+                            }
+                            else
+                            {
+                                ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
+                            }
                         }
-                        else
-                        {
-                            ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
-                        }
+
                     }
-                    
 
-                    
+
                 }
                 catch (Exception e)
                 {
