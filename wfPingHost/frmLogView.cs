@@ -138,7 +138,7 @@ namespace wfPingHost
         {
             var FilterList = new clWriteReadinBD();
 
-            var filterTypeStatus = FilterList.Get(cmbFiltrStatus.SelectedValue.ToString(), dtSelect.Value);
+            var filterTypeStatus = FilterList.Get(cmbFiltrStatus.SelectedValue.ToString(), dtSelect.Value, cmbIP.SelectedValue.ToString());
             RefreshGridView(filterTypeStatus);
 
         }

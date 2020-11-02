@@ -14,7 +14,7 @@ namespace wfPingHost
     {
         //private static string IP = Properties.Resources.strIP;
         //private static string NameDB = IP.Replace(".", "");
-        private static string NameDB = DateTime.Now.ToString("ddMMyyyy");
+        private static string NameDB = DateTime.Now.ToString("dd-MM-yyyy");
         private static string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
         public void Write(string IPHost, DateTime dtNow, string Status)
@@ -147,35 +147,72 @@ namespace wfPingHost
             }
         }
 
-        public IList<clDataPing> Get(string Status, DateTime dtSelect)
+        public IList<clDataPing> Get(string Status, DateTime dtSelect, string IP)
         {
             var returnResult = new List<clDataPing>();
-
+            
             using (var db = new LiteEngine(pathProg))
             {
+                //var HostCollection = db.GetCollection<clDataPing>("PingHost");
+                //IEnumerable<clDataPing> filter;
+
+                //if (Status.Equals("All"))
+                //{
+                //    filter = HostCollection.All();
+
+                //}
+                //else if (Status.Equals("Failed All"))
+                //{
+                //    filter = HostCollection.Find(i => i.strPingStatus != "Success");
+
+
+                //}
+                //else
+                //{
+                //    filter = HostCollection.Find(i => i.strPingStatus.Equals(Status));
+                //}
+
+
+                //foreach (clDataPing item in filter)
+                //{
+                //    returnResult.Add(item);
+                //}
+
+                //return returnResult.FindAll(i => i.dtPingData.Date == dtSelect.Date);
+
+                
+                //var filterResult1 = new List<clDataPing>();
+                //var filterResult2 = new List<clDataPing>();
+                //IEnumerable<clDataPing> filter1;
+                //IEnumerable<clDataPing> filter2;
+
+
+                // col.EnsureIndex(x => x.Name);
+
+                // //https://github.com/mbdavid/LiteDB/wiki/Queries
+                //var result = col
+                //     .Find(Query.EQ("Name", "John Doe")) // This filter is executed in LiteDB using index
+                //     .Where(x => (x.CreationDate >= x.DueDate.AddDays(-5))) // This filter is executed by LINQ to Object
+                //     .OrderBy(x => x.Age)
+                //     .Select(x => new
+                //     {
+                //         FullName = x.FirstName + " " + x.LastName,
+                //         DueDays = x.DueDate - x.CreationDate
+                //     }); // Transform
+
                 var HostCollection = db.GetCollection<clDataPing>("PingHost");
-
-                IEnumerable<clDataPing> filter;
-
-                if (Status.Equals("All"))
-                {
-                    filter = HostCollection.All();
-                }
-                else if (Status.Equals("Failed All"))
-                {
-                    filter = HostCollection.Find(i => i.strPingStatus!= "Success");
-                }
-                else
-                {
-                    filter = HostCollection.Find(i => i.strPingStatus.Equals(Status));
-                }
-
-                foreach (clDataPing item in filter)
+                var result2 = HostCollection.Find(Query.Not("strPingIP", "IP"))
+                    .Where(x => (x.strPingStatus!= "Success"))
+                    .OrderBy(x => x.dtPingData)
+                    ;
+                foreach (clDataPing item in result2)
                 {
                     returnResult.Add(item);
                 }
 
                 return returnResult.FindAll(i => i.dtPingData.Date == dtSelect.Date);
+
+
             }
 
         }
