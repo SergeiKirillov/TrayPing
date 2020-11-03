@@ -33,6 +33,53 @@ namespace wfPingHost
             chkAutoStart.Checked = blAutoStart;
         }
 
-        
+        private void chkBDError_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBDError.Checked)
+            {
+                System.Diagnostics.Debug.WriteLine("DB error write");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("DB error no write");
+            }
+        }
+
+        private void chkFileError_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFileError.Checked)
+            {
+                System.Diagnostics.Debug.WriteLine("File error write");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("File error no write");
+            }
+       
+        }
+
+        private void chkBD_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBD.Checked)
+            {
+                System.Diagnostics.Debug.WriteLine("DB All write");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("DB All no write");
+            }
+        }
+
+        private void chkFiles_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFiles.Checked)
+            {
+                System.Diagnostics.Debug.WriteLine("File All write");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("File All no write");
+            }
+        }
     }
 }

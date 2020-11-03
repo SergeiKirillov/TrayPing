@@ -44,6 +44,7 @@
             this.chkBD.TabIndex = 2;
             this.chkBD.Text = "Сохранение результата в БД (Всё)";
             this.chkBD.UseVisualStyleBackColor = true;
+            this.chkBD.CheckedChanged += new System.EventHandler(this.chkBD_CheckedChanged);
             // 
             // chkFiles
             // 
@@ -54,6 +55,7 @@
             this.chkFiles.TabIndex = 3;
             this.chkFiles.Text = "Сохранение результата в текстовой файл (Всё)";
             this.chkFiles.UseVisualStyleBackColor = true;
+            this.chkFiles.CheckedChanged += new System.EventHandler(this.chkFiles_CheckedChanged);
             // 
             // chkAutoStart
             // 
@@ -74,6 +76,7 @@
             this.chkFileError.TabIndex = 6;
             this.chkFileError.Text = "Сохранение результата в текстовой файл (только Ошибки)";
             this.chkFileError.UseVisualStyleBackColor = true;
+            this.chkFileError.CheckedChanged += new System.EventHandler(this.chkFileError_CheckedChanged);
             // 
             // chkBDError
             // 
@@ -84,12 +87,13 @@
             this.chkBDError.TabIndex = 5;
             this.chkBDError.Text = "Сохранение результата в БД (только Ошибки)";
             this.chkBDError.UseVisualStyleBackColor = true;
+            this.chkBDError.CheckedChanged += new System.EventHandler(this.chkBDError_CheckedChanged);
             // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 307);
+            this.ClientSize = new System.Drawing.Size(643, 161);
             this.Controls.Add(this.chkFileError);
             this.Controls.Add(this.chkBDError);
             this.Controls.Add(this.chkAutoStart);
