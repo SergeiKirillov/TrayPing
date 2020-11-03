@@ -88,8 +88,11 @@
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.cmbFiltrStatus);
             this.Controls.Add(this.GridHostRezult);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmLogView";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Просмотр лога пинга хоста";
             this.Load += new System.EventHandler(this.frmLogView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridHostRezult)).EndInit();

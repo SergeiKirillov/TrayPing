@@ -20,7 +20,7 @@ namespace wfPingHost
 
         public frmLogView()
         {
-                                   
+
             InitializeComponent();
 
             var LibDb = new clWriteReadinBD();
@@ -34,18 +34,31 @@ namespace wfPingHost
             
             StatusPing.Add("Failed All");
             cmbFiltrStatus.DataSource = StatusPing;
+
             cmbFiltrStatus.SelectedItem = 24;
 
             RefreshGridView(LibDb.GetAll());
 
-            GridHostRezult.Columns[0].Visible = false;
+            GridHostRezult.Columns[0].Visible = false; //Непоказываем первый столбец
+
+            GridHostRezult.Columns[1].HeaderText = "Дата/Время"; //Название столбца
+            GridHostRezult.Columns[1].DefaultCellStyle.Format = "dd.MM HH:mm:ss"; //Формат данных по умолчанию
+
+
+            GridHostRezult.Columns[2].HeaderText = "Статус";
+
+            GridHostRezult.Columns[3].HeaderText = "IP адрес";
+
             GridHostRezult.AllowUserToAddRows = false;
             GridHostRezult.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GridHostRezult.MultiSelect = false;
 
+
             var HostList = GetHostList();
             HostList.Add("All");
-            cmbIP.DataSource = HostList;            
+            cmbIP.DataSource = HostList;
+
+            
         }
 
         private List<string> GetHostList()

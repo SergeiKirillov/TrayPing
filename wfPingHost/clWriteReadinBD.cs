@@ -138,7 +138,9 @@ namespace wfPingHost
             {
                 var HostCollection = db.GetCollection<clDataPing>("PingHost");
 
-                var results = HostCollection.All();
+                var results = HostCollection.All()
+                    .OrderByDescending(x=>x.dtPingData);
+
                 foreach (clDataPing item in results)
                 {
                     returnRezult.Add(item);  
@@ -205,23 +207,46 @@ namespace wfPingHost
                 var HostCollection = db.GetCollection<clDataPing>("PingHost");
                 IEnumerable<clDataPing> result2;
 
-                if (Status.Equals("All"))
+                if (IP.Equals("All"))
                 {
-                    result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
-                    .OrderByDescending(x => x.dtPingData);
-                }
-                else  if (Status.Equals("Failed All"))
-                {
-                    result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
-                    .Where(x => (x.strPingStatus != "Success"))
-                    .OrderByDescending(x => x.dtPingData);
+                    if (Status.Equals("All"))
+                    {
+                        result2 = HostCollection.All()
+                        .OrderByDescending(x => x.dtPingData);
+                    }
+                    else if (Status.Equals("Failed All"))
+                    {
+                        result2 = HostCollection.Find(Query.Not("strPingStatus", "Success"))
+                        .OrderByDescending(x => x.dtPingData);
+                    }
+                    else
+                    {
+                        result2 = HostCollection.Find(Query.EQ("strPingStatus", Status))
+                        .OrderByDescending(x => x.dtPingData);
+                    }
                 }
                 else
                 {
-                    result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
-                    .Where(x => (x.strPingStatus.Equals(Status)))
-                    .OrderByDescending(x => x.dtPingData);
+                    if (Status.Equals("All"))
+                    {
+                        result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
+                        .OrderByDescending(x => x.dtPingData);
+                    }
+                    else if (Status.Equals("Failed All"))
+                    {
+                        result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
+                        .Where(x => (x.strPingStatus != "Success"))
+                        .OrderByDescending(x => x.dtPingData);
+                    }
+                    else
+                    {
+                        result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
+                        .Where(x => (x.strPingStatus.Equals(Status)))
+                        .OrderByDescending(x => x.dtPingData);
+                    }
                 }
+
+               
 
 
                 
