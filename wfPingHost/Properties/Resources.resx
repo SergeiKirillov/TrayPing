@@ -131,7 +131,7 @@
     <value>192.168.0.21</value>
   </data>
   <data name="strLogBDAll" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="strLogFilesAll" xml:space="preserve">
     <value>False</value>

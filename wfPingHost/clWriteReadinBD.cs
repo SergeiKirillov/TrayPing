@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LiteDB;
+using System.Net.NetworkInformation;
 
 namespace wfPingHost
 {
@@ -180,7 +181,7 @@ namespace wfPingHost
 
                 //return returnResult.FindAll(i => i.dtPingData.Date == dtSelect.Date);
 
-                
+
                 //var filterResult1 = new List<clDataPing>();
                 //var filterResult2 = new List<clDataPing>();
                 //IEnumerable<clDataPing> filter1;
@@ -200,11 +201,32 @@ namespace wfPingHost
                 //         DueDays = x.DueDate - x.CreationDate
                 //     }); // Transform
 
+
                 var HostCollection = db.GetCollection<clDataPing>("PingHost");
-                var result2 = HostCollection.Find(Query.Not("strPingIP", "IP"))
-                    .Where(x => (x.strPingStatus!= "Success"))
-                    .OrderBy(x => x.dtPingData)
-                    ;
+                IEnumerable<clDataPing> result2;
+
+                if (Status.Equals("All"))
+                {
+                    result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
+                    .OrderByDescending(x => x.dtPingData);
+                }
+                else  if (Status.Equals("Failed All"))
+                {
+                    result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
+                    .Where(x => (x.strPingStatus != "Success"))
+                    .OrderByDescending(x => x.dtPingData);
+                }
+                else
+                {
+                    result2 = HostCollection.Find(Query.EQ("strPingIP", IP))
+                    .Where(x => (x.strPingStatus.Equals(Status)))
+                    .OrderByDescending(x => x.dtPingData);
+                }
+
+
+                
+
+
                 foreach (clDataPing item in result2)
                 {
                     returnResult.Add(item);

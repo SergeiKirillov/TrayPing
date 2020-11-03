@@ -109,7 +109,7 @@ namespace wfPingHost.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на False.
+        ///   Ищет локализованную строку, похожую на True.
         /// </summary>
         public static string strLogBDAll {
             get {

@@ -117,5 +117,10 @@
   <ItemGroup>
     <None Include="Resources\Uiconstock-Flat-File-Type-Log.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="computersList.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
