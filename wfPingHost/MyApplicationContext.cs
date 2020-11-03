@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Net;
 
 namespace wfPingHost
 {
@@ -101,23 +101,29 @@ namespace wfPingHost
             {
                 
                 Thread.Sleep(1000);
+                
+                Ping myPing = new Ping();
 
-                try
+               
+                //string IP = "192.168.1.1";
+
+                //string IP = Properties.Resources.strIP;
+                //PingReply reply = myPing.Send(IP, 1000);
+
+                
+                
+                hosts = getComputersListFromTxtFile(@"computersList.txt");
+
+
+                foreach (string item in hosts)
                 {
-                    Ping myPing = new Ping();
-
-                    //string IP = "192.168.1.1";
-                    //string IP = Properties.Resources.strIP;
-                    //PingReply reply = myPing.Send(IP, 1000);
-
-                    
-                    
-                    hosts = getComputersListFromTxtFile(@"computersList.txt");
-
-                    foreach (string item in hosts)
+                    try
                     {
-                        PingReply reply = myPing.Send(item, 1000);
+                        //Console.WriteLine("{0} - ",item);
+                        
+                        PingReply reply = myPing.Send(IPAddress.Parse(item), 100); //100 - An Int32 value that specifies the maximum number of milliseconds (after sending the echo message) to wait for the ICMP echo reply message.
 
+                        //Console.WriteLine("{0} - {1}",item, reply.Status);
 
                         if (reply != null)
                         {
@@ -132,7 +138,7 @@ namespace wfPingHost
                             else if ((Convert.ToBoolean(Properties.Resources.strLogBDAll)) || (Convert.ToBoolean(Properties.Resources.strLogFilesAll)))
                             {
                                 clWriteReadinBD wrbd = new clWriteReadinBD();
-                                wrbd.Write(item,DateTime.Now, reply.Status.ToString());
+                                wrbd.Write(item, DateTime.Now, reply.Status.ToString());
                             }
 
 
@@ -146,18 +152,24 @@ namespace wfPingHost
                                 ni.Icon = wfPingHost.Properties.Resources.red_circle_64;
                             }
                         }
+                    }
+                    catch (Exception e)
+                    {
+                        //System.Diagnostics.Debug.WriteLine("PingHost - " + e.Message);
+                        //Console.WriteLine(e.Message);
+                        //clWriteReadinBD fileError = new clWriteReadinBD();
+                        //fileError.WriteFile("Error-" + item, DateTime.Now, e.Message);
+
+                        clWriteReadinBD wrbd = new clWriteReadinBD();
+                        wrbd.Write(item, DateTime.Now, e.Message);
 
                     }
-
-
                 }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine("PingHost - " + e.Message);
-                    //Console.WriteLine("ERROR: You have Some TIMEOUT issue");
-                }
+ 
+                   
 
             }
+
         }
     }
 }

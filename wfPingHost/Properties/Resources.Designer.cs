@@ -73,6 +73,16 @@ namespace wfPingHost.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
+        public static System.Drawing.Icon Iconshock_Real_Vista_Data_Connect {
+            get {
+                object obj = ResourceManager.GetObject("Iconshock_Real_Vista_Data_Connect", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
         public static System.Drawing.Icon Log {
             get {
                 object obj = ResourceManager.GetObject("Log", resourceCulture);
@@ -109,7 +119,7 @@ namespace wfPingHost.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на True.
+        ///   Ищет локализованную строку, похожую на False.
         /// </summary>
         public static string strLogBDAll {
             get {

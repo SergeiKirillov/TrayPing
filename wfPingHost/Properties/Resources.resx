@@ -131,7 +131,7 @@
     <value>192.168.0.21</value>
   </data>
   <data name="strLogBDAll" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="strLogFilesAll" xml:space="preserve">
     <value>False</value>
@@ -144,5 +144,8 @@
   </data>
   <data name="strLogFilesError" xml:space="preserve">
     <value>True</value>
+  </data>
+  <data name="Iconshock_Real_Vista_Data_Connect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconshock-Real-Vista-Data-Connect.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

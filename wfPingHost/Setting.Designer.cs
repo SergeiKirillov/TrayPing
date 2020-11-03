@@ -95,7 +95,11 @@
             this.Controls.Add(this.chkAutoStart);
             this.Controls.Add(this.chkFiles);
             this.Controls.Add(this.chkBD);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Setting";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройка программы";
             this.ResumeLayout(false);
             this.PerformLayout();

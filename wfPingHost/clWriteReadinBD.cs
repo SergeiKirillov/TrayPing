@@ -109,7 +109,7 @@ namespace wfPingHost
         //при создании BD
 
 
-        private void WriteFile(string IP, DateTime dtNow, string messageBD)
+        public void WriteFile(string IP, DateTime dtNow, string messageBD)
         {
             //System.Diagnostics.Debug.WriteLine(dtNow.ToString() + "-----" + messageBD);
 
