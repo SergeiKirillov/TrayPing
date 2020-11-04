@@ -66,6 +66,7 @@
             this.chkAutoStart.TabIndex = 4;
             this.chkAutoStart.Text = "Автозагрузка";
             this.chkAutoStart.UseVisualStyleBackColor = true;
+            this.chkAutoStart.CheckedChanged += new System.EventHandler(this.chkAutoStart_CheckedChanged);
             // 
             // chkFileError
             // 

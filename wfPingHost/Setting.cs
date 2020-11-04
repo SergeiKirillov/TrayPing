@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace wfPingHost
 {
@@ -91,6 +92,39 @@ namespace wfPingHost
             else
             {
                 System.Diagnostics.Debug.WriteLine("File All no write");
+            }
+        }
+
+        private void chkAutoStart_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.blAutoStart = chkAutoStart.Checked;
+            Properties.Settings.Default.Save();
+
+            if (chkAutoStart.Checked)
+            {
+                const string applicationName = "TrayPing";
+                const string pathRegistryKeyStartup =
+                            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+
+                using (RegistryKey registryKeyStartup =
+                            Registry.CurrentUser.OpenSubKey(pathRegistryKeyStartup, true))
+                {
+                    registryKeyStartup.SetValue(
+                        applicationName,
+                        string.Format("\"{0}\"", System.Reflection.Assembly.GetExecutingAssembly().Location));
+                }
+            }
+            else
+            {
+                const string applicationName = "TrayPing";
+                const string pathRegistryKeyStartup =
+                            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+
+                using (RegistryKey registryKeyStartup =
+                            Registry.CurrentUser.OpenSubKey(pathRegistryKeyStartup, true))
+                {
+                    registryKeyStartup.DeleteValue(applicationName, false);
+                }
             }
         }
     }
