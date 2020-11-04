@@ -22,5 +22,65 @@ namespace wfPingHost.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool blFileError {
+            get {
+                return ((bool)(this["blFileError"]));
+            }
+            set {
+                this["blFileError"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool blDbError {
+            get {
+                return ((bool)(this["blDbError"]));
+            }
+            set {
+                this["blDbError"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool blFileAll {
+            get {
+                return ((bool)(this["blFileAll"]));
+            }
+            set {
+                this["blFileAll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool blDbAll {
+            get {
+                return ((bool)(this["blDbAll"]));
+            }
+            set {
+                this["blDbAll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool blAutoStart {
+            get {
+                return ((bool)(this["blAutoStart"]));
+            }
+            set {
+                this["blAutoStart"] = value;
+            }
+        }
     }
 }

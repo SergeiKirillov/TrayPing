@@ -14,9 +14,9 @@ namespace wfPingHost
 {
     public partial class frmLogView : Form
     {
-        private static string IP = Properties.Resources.strIP;
-        private static string NameDB = IP.Replace(".", "");
-        private static string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
+        //private static string IP = Properties.Resources.strIP;
+        //private static string NameDB = IP.Replace(".", "");
+        //private static string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
         public frmLogView()
         {
@@ -26,10 +26,12 @@ namespace wfPingHost
             var LibDb = new clWriteReadinBD();
 
             var StatusPing = GetListStatus();
-            if (Convert.ToBoolean(Properties.Resources.strLogBDAll)||Convert.ToBoolean(Properties.Resources.strLogFilesAll))
+
+            if (Properties.Settings.Default.blDbAll||Properties.Settings.Default.blFileAll)
             {
                 StatusPing.Add("All");
             }
+
 
             
             StatusPing.Add("Failed All");
@@ -112,20 +114,20 @@ namespace wfPingHost
 
         private void frmLogView_Load(object sender, EventArgs e)
         {
-            if ((Convert.ToBoolean(Properties.Resources.strLogBDAll))||(Convert.ToBoolean(Properties.Resources.strLogBDError)))
-            {
-                frmLogView_dbLoad();
-            }
-            else
-            {
-                frmLogView_FileLoad();
-            }
+            //if ((Convert.ToBoolean(Properties.Resources.strLogBDAll))||(Convert.ToBoolean(Properties.Resources.strLogBDError)))
+            //{
+            //    frmLogView_dbLoad();
+            //}
+            //else
+            //{
+            //    frmLogView_FileLoad();
+            //}
         }
 
         private void frmLogView_FileLoad()
         {
-            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "Log.txt";
-            System.Diagnostics.Debug.WriteLine("File log :" + pathProg);
+            //string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "Log.txt";
+            //System.Diagnostics.Debug.WriteLine("File log :" + pathProg);
         }
 
         private void frmLogView_dbLoad()

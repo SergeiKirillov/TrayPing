@@ -22,12 +22,12 @@ namespace wfPingHost
         {
             try
             {
-                if ((Convert.ToBoolean(Properties.Resources.strLogFilesAll))|| (Convert.ToBoolean(Properties.Resources.strLogFilesError)))
+                if (Properties.Settings.Default.blFileAll||Properties.Settings.Default.blFileError)
                 {
                     WriteFile(IPHost, dtNow, Status);
                 }
 
-                if ((Convert.ToBoolean(Properties.Resources.strLogBDAll))||(Convert.ToBoolean(Properties.Resources.strLogBDError)))
+                if (Properties.Settings.Default.blDbAll||Properties.Settings.Default.blDbError)
                 {
                     WriteBD(IPHost, dtNow, Status);
                 }

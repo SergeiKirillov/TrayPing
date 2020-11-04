@@ -130,12 +130,12 @@ namespace wfPingHost
                             //Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime.ToString() + " \n Address : " + reply.Address);
                             //Console.WriteLine(reply.ToString());
 
-                            if (((Convert.ToBoolean(Properties.Resources.strLogBDError)) || (Convert.ToBoolean(Properties.Resources.strLogFilesError))) && (reply.Status != IPStatus.Success))
+                            if ((Properties.Settings.Default.blDbError||Properties.Settings.Default.blFileError) && (reply.Status != IPStatus.Success))
                             {
                                 clWriteReadinBD wrbd = new clWriteReadinBD();
                                 wrbd.Write(item, DateTime.Now, reply.Status.ToString());
                             }
-                            else if ((Convert.ToBoolean(Properties.Resources.strLogBDAll)) || (Convert.ToBoolean(Properties.Resources.strLogFilesAll)))
+                            else if (Properties.Settings.Default.blDbAll||Properties.Settings.Default.blFileAll)
                             {
                                 clWriteReadinBD wrbd = new clWriteReadinBD();
                                 wrbd.Write(item, DateTime.Now, reply.Status.ToString());
